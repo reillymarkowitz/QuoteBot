@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reillymarkowitz/ao-twitter-bot.git"
+    "url": "git+https://github.com/reillymarkowitz/twitter-book-bot.git"
   },
   "author": "Reilly Markowitz",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "twit": "^2.2.11"
   },
   "bugs": {
-    "url": "https://github.com/reillymarkowitz/ao-twitter-bot/issues"
+    "url": "https://github.com/reillymarkowitz/twitter-book-bot/issues"
   },
-  "homepage": "https://github.com/reillymarkowitz/ao-twitter-bot#readme"
+  "homepage": "https://github.com/reillymarkowitz/twitter-book-bot#readme"
 }
