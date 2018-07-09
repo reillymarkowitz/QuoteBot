@@ -1,3 +1,3 @@
 # twitter-book-bot
-A Twitter bot built with Node.js that tweets a given text file line by line.
-Example implementation here: https://twitter.com/AntiOedipusBot
+A simple Node.js Twitter bot that tweets any given text file one sentence at a time.
+Sample implementation here: https://twitter.com/AntiOedipusBot
