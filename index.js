@@ -2,7 +2,8 @@ var Twit = require('twit'),
 	fs = require('fs'),
 	readline = require('readline'),
 	stream = require('stream'),
-	dotenv = require('dotenv')
+	dotenv = require('dotenv'),
+	tokenizer = require('sbd')
 
 dotenv.load();
 
@@ -26,27 +27,47 @@ var rl = readline.createInterface(
 	new stream
 )
 
-var lines = []
+var text = ''
 
 // Process each line of book into array
 rl.on('line', function(line) {
-	if(typeof line !== undefined)
-		if(line.length > 0)
-			lines.push(line)
+	text += line
 })
 
-// Start tweeting after text processing finishes
-rl.on('close', start)
+var sentences = []
 
-var index = 0;
+rl.on('close', function() {
+	sentences = tokenizer.sentences(text)
+	start()
+})
 
+var index = 0
+var interval_id;
+
+// Start tweeting, continue until end of sentences.
 function start() {
-	if(index < lines.length) {
-		tweet(lines[index])
-		index++
-		setTimeout(start, 5 * 60 * 1000) // 5 minute pause between tweets
-	} else {
-		tweet('End of book. Follow @ReillyMarkowitz for more projects.')
-		console.log('Process finished.')
+    interval_id = setInterval(function() {
+        if (index < sentences.length) {
+        	var sentence = sentences[index]
+            if (sentence.length <= 280)
+                tweet(sentence)
+            else
+                process_long(sentence)
+            index++
+        } else
+        	end()
+    }, 30 * 60 * 1000) // 30 minutes between tweets
+}
+
+function end() {
+	clearInterval(interval_id)
+	tweet('End of book. Follow @ReillyMarkowitz for more projects.')
+}
+
+function process_long(sentence) {
+	while(sentence.length > 280) {
+		tweet(sentence.substring(0, 280))
+		sentence = sentence.substring(280)
 	}
+	tweet(sentence)
 }

@@ -1,6 +1,6 @@
 {
   "name": "ao-twitter-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Tweeting Anti-Oedipus: Capitalism and Schizophrenia line by line.",
   "main": "index.js",
   "scripts": {
@@ -9,16 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reillymarkowitz/ao-twitter-bot.git"
+    "url": "git+https://github.com/reillymarkowitz/twitter-book-bot.git"
   },
   "author": "Reilly Markowitz",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^6.0.0",
+    "sbd": "^1.0.12",
     "twit": "^2.2.11"
   },
   "bugs": {
-    "url": "https://github.com/reillymarkowitz/ao-twitter-bot/issues"
+    "url": "https://github.com/reillymarkowitz/twitter-book-bot/issues"
   },
-  "homepage": "https://github.com/reillymarkowitz/ao-twitter-bot#readme"
+  "homepage": "https://github.com/reillymarkowitz/twitter-book-bot#readme"
 }
