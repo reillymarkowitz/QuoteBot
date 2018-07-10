@@ -3,6 +3,8 @@ import nltk
 import time
 import os
 
+nltk.download('punkt')
+
 # Replace with your own keys
 CONSUMER_KEY = os.environ['CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
