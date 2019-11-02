@@ -1,11 +1,7 @@
 #!/usr/bin/env python3
 
-import tweepy
+import tweepy, nltk, time, os, io
 from tweepy.auth import OAuthHandler
-import nltk
-import time
-import os
-import io
 
 # Replace with your own keys
 CONSUMER_KEY = 'L6V3C5Ee7Tqi62EGOPBVUaUvE'
@@ -18,7 +14,6 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 BOT_USERNAME = api.me().screen_name
-print(BOT_USERNAME)
 TWEET_LEN = 280
 REPLY_LEN = TWEET_LEN - len(BOT_USERNAME) - 2
 STARTING_TOKEN = 6519
@@ -68,7 +63,7 @@ def main():
 
 try:
     # main()
-    console.log('hello')
+    print('hello') 
 except tweepy.TweepError as e:
     error_code = e[0].code
     if error_code == 187:           # Duplicate status
