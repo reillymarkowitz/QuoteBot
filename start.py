@@ -2,18 +2,22 @@
 
 import tweepy, nltk, time, os, io
 from tweepy.auth import OAuthHandler
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Replace with your own keys
-CONSUMER_KEY = 'L6V3C5Ee7Tqi62EGOPBVUaUvE'
-CONSUMER_SECRET = 'Qyh4KCFIBpM6MYZi39BHaVnMhKhP5LhnIduWHuU1gczDSexkPG'
-ACCESS_TOKEN = '1015305127207559170-oTRJBXqkFpTOnFR3DT8z81ePhN9Guk'
-ACCESS_TOKEN_SECRET = 'beSTC1r0BP9Pol88I2rKXx67Rcyi995DlpgamtZHfC5g9'
+CONSUMER_KEY = os.getenv('CONSUMER_KEY')
+CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
 
 auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 BOT_USERNAME = api.me().screen_name
+print(BOT_USERNAME)
 TWEET_LEN = 280
 REPLY_LEN = TWEET_LEN - len(BOT_USERNAME) - 2
 STARTING_TOKEN = 6519
@@ -65,8 +69,10 @@ try:
     # main()
     print('hello') 
 except tweepy.TweepError as e:
-    error_code = e[0].code
-    if error_code == 187:           # Duplicate status
+    error_code = e.message[0]['code']
+
+    # Duplicate status error
+    if error_code == 187: 
         print('Status is a duplicate. Attempting to fix...')
         # Implement fix
     else:
