@@ -17,7 +17,6 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 BOT_USERNAME = api.me().screen_name
-print(BOT_USERNAME)
 TWEET_LEN = 280
 REPLY_LEN = TWEET_LEN - len(BOT_USERNAME) - 2
 STARTING_TOKEN = 6519
@@ -66,8 +65,7 @@ def main():
 
 
 try:
-    # main()
-    print('hello') 
+    main()
 except tweepy.TweepError as e:
     error_code = e.message[0]['code']
 
