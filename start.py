@@ -1,19 +1,16 @@
 #!/usr/bin/env python3
 
-import tweepy
-from tweepy import OAuthHandler
-import nltk
-import time
-import os
-import io
+import tweepy, nltk, time, os, io
+from tweepy.auth import OAuthHandler
+from dotenv import load_dotenv
 
-nltk.download('punkt')
+load_dotenv()
 
 # Replace with your own keys
-CONSUMER_KEY = 'L6V3C5Ee7Tqi62EGOPBVUaUvE'
-CONSUMER_SECRET = 'Qyh4KCFIBpM6MYZi39BHaVnMhKhP5LhnIduWHuU1gczDSexkPG'
-ACCESS_TOKEN = '1015305127207559170-oTRJBXqkFpTOnFR3DT8z81ePhN9Guk'
-ACCESS_TOKEN_SECRET = 'beSTC1r0BP9Pol88I2rKXx67Rcyi995DlpgamtZHfC5g9'
+CONSUMER_KEY = os.getenv('CONSUMER_KEY')
+CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
+ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
+ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
 
 auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
@@ -70,8 +67,10 @@ def main():
 try:
     main()
 except tweepy.TweepError as e:
-    error_code = e[0].code
-    if error_code == 187:           # Duplicate status
+    error_code = e.message[0]['code']
+
+    # Duplicate status error
+    if error_code == 187: 
         print('Status is a duplicate. Attempting to fix...')
         # Implement fix
     else:
