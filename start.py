@@ -50,22 +50,30 @@ def main():
     with io.open('ao.txt', 'r', encoding='utf-8') as book_file:
         book_string = book_file.read()
 
-    book_array = nltk.sent_tokenize(book_string)
+    try:
+        book_array = nltk.sent_tokenize(book_string)
 
-    for i, token in enumerate(book_array[STARTING_TOKEN:]):
-        print('Token # %d' % (i + STARTING_TOKEN))
-        if len(token) <= TWEET_LEN:
-            tweet(token)
-        else:
-            thread(token)
-        time.sleep(60 * 60)  # Sleep for 60 minutes between tweets
+        for i, token in enumerate(book_array[STARTING_TOKEN:]):
+            print('Token # %d' % (i + STARTING_TOKEN))
+            if len(token) <= TWEET_LEN:
+                tweet(token)
+            else:
+                thread(token)
+            time.sleep(60 * 60)  # Sleep for 60 minutes between tweets
 
-    tweet('End of book. Follow @ReillyMarkowitz for more projects.')
-    print('FIN')
+        tweet('End of book. Follow @ReillyMarkowitz for more projects.')
+        print('FIN')
+    except LookupError:
+        print('ERROR: Please run setup.py before start.py.')
 
 
 try:
-    main()
+    #main()
+    try:
+        foo = nltk.sent_tokenize('Test')
+        print(foo)
+    except LookupError:
+        print('ERROR: Please run setup.py before start.py.')
 except tweepy.TweepError as e:
     error_code = e.message[0]['code']
 
