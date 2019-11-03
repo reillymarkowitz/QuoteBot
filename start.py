@@ -68,12 +68,10 @@ def main():
 
 
 try:
-    #main()
-    try:
-        foo = nltk.sent_tokenize('Test')
-        print(foo)
-    except LookupError:
-        print('ERROR: Please run setup.py before start.py.')
+    # main()
+    with io.open('ao.txt', 'r', encoding='utf-8') as book:
+        tokens = nltk.sent_tokenize(book.read())
+        print(tokens)
 except tweepy.TweepError as e:
     error_code = e.message[0]['code']
 
