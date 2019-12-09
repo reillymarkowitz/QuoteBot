@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import tweepy, nltk, time, os, io
+import tweepy, nltk, time, os, io, csv
 from tweepy.auth import OAuthHandler
 from dotenv import load_dotenv
 
@@ -69,9 +69,11 @@ def main():
 
 try:
     # main()
-    with io.open('ao.txt', 'r', encoding='utf-8') as book:
-        tokens = nltk.sent_tokenize(book.read())
-        print(tokens)
+    with open('tokenized_tweets.csv', 'rt') as quoteFile:
+        for row in csv.reader(quoteFile):
+            quote = row[0]
+            print(quote)
+
 except tweepy.TweepError as e:
     error_code = e.message[0]['code']
 
