@@ -1,6 +1,6 @@
 .env
-.swp
-.swo
+*.swp
+*.swo
 .DS_Store
 .python-version
 tokenized_tweets.csv
