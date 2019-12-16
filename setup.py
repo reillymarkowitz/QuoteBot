@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from bs4 import BeautifulSoup
+from random import shuffle
 import requests, re, nltk, csv
 
 AUTHOR_QUOTE_URL = 'https://www.goodreads.com/author/quotes/13009.Gilles_Deleuze'
@@ -36,6 +37,8 @@ while True:
 
 
 tweetFile = csv.writer(open('tokenized_tweets.csv', 'w')) 
+
+shuffle(quotes)
 
 for quote in quotes:
     tweetFile.writerow([quote])
