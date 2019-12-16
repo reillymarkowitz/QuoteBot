@@ -17,8 +17,8 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 BOT_USERNAME = api.me().screen_name
-TWEET_LEN = 280
-REPLY_LEN = TWEET_LEN - len(BOT_USERNAME) - 2
+MAX_TWEET_LEN = 280
+REPLY_LEN = MAX_TWEET_LEN - len(BOT_USERNAME) - 2
 STARTING_TOKEN = 6519
 
 
@@ -38,8 +38,8 @@ def reply_to(string, username, tweet_id):
 
 
 def thread(string):
-    tweet_id = tweet(string[:TWEET_LEN - 1])
-    string = string[TWEET_LEN - 1:]
+    tweet_id = tweet(string[:MAX_TWEET_LEN - 1])
+    string = string[MAX_TWEET_LEN - 1:]
     while len(string) > REPLY_LEN:
         tweet_id = reply_to(string[:REPLY_LEN], BOT_USERNAME, tweet_id)
         string = string[REPLY_LEN:]
@@ -55,7 +55,7 @@ def main():
 
         for i, token in enumerate(book_array[STARTING_TOKEN:]):
             print('Token # %d' % (i + STARTING_TOKEN))
-            if len(token) <= TWEET_LEN:
+            if len(token) <= MAX_TWEET_LEN:
                 tweet(token)
             else:
                 thread(token)
