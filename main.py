@@ -1,10 +1,31 @@
 #!/usr/bin/env python3
 
-import io, csv, time
+import io, csv, time, sys, argparse, tweepy
 from bot import QuoteBot
 
-START_QUOTE = 0
-WAIT_TIME = 12
+parser = argparse.ArgumentParser()
+
+parser.add_argument(
+        '-s',
+        '--start', 
+        type = int, 
+        default = 0,
+        help = 'quote number to begin with (default 0)'
+    )
+
+parser.add_argument(
+        '-i', 
+        '--interval', 
+        type = int, 
+        default = 12,
+        help = 'time between tweets in hours (default 12)'
+    )
+
+options = parser.parse_args(sys.argv[1:])
+
+START_QUOTE = options.start
+WAIT_TIME = options.interval
+
 
 with open('tokenized_tweets.csv', 'rt') as quoteFile:
     reader = csv.reader(quoteFile)
@@ -33,3 +54,4 @@ with open('tokenized_tweets.csv', 'rt') as quoteFile:
         time.sleep(60 * 60 * WAIT_TIME)
 
 print('No quotes remaining.')
+
