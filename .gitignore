@@ -4,3 +4,4 @@
 .DS_Store
 .python-version
 tokenized_tweets.csv
+__pycache__/
