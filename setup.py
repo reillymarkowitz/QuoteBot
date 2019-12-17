@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from random import shuffle
-import requests, re, nltk, csv
+import requests, re, csv
 
 AUTHOR_QUOTE_URL = 'https://www.goodreads.com/author/quotes/13009.Gilles_Deleuze'
 PARAMS = {'page' : 1}
