@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import io, csv, time, sys, argparse, tweepy
 from bot import QuoteBot
 
