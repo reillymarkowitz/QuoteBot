@@ -7,11 +7,11 @@ Sample implementation here: https://twitter.com/AntiOedipusBot
 
 ### Using SSH
 
-    git clone git@github.com:reillymarkowitz/twitter-book-bot.git
+    git clone git@github.com:reillymarkowitz/QuoteBot.git
 
 ### Using HTTPS
 
-    git clone https://github.com/reillymarkowitz/twitter-book-bot.git
+    git clone https://github.com/reillymarkowitz/QuoteBot.git
 
 ## Create a virtual environment
 
@@ -25,7 +25,7 @@ Test your installation:
 
 Create a new virtualenv using a copy of Python 3:
 
-    cd twitter-book-bot
+    cd QuoteBot
 	virtualenv -p /path/to/python3 venv
 
 Activate the new virtualenv:
@@ -46,7 +46,7 @@ Install the required dependencies with `pip`:
 
 For the bot to work with your Twitter account, you must create a `.env` file in the project root directory containing your account's access credentials:
 
-    # twitter-book-bot/.env contents
+    # This goes inside QuoteBot/.env
     CONSUMER_KEY=[YOUR CONSUMER KEY]
     CONSUMER_SECRET=[YOUR CONSUMER SECRET]
     ACCESS_TOKEN=[YOUR ACCESS TOKEN]
