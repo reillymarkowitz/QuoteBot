@@ -31,7 +31,7 @@ class QuoteBot:
         self.api = tweepy.API(auth)
 
         self.username = self.api.me().screen_name
-        self.max_tweet_len = 280
+        self.max_tweet_len = 270 # the limit is 280 but twitter counts some characters as 2
         self.max_reply_len = self.max_tweet_len - len(self.username) - 2
 
         
@@ -43,8 +43,8 @@ class QuoteBot:
 
     
     def thread(self, string):
-        tweet_id = self.tweet(string[:self.max_tweet_len - 1])
-        string = string[self.max_tweet_len - 1:]
+        tweet_id = self.tweet(string[:self.max_tweet_len])
+        string = string[self.max_tweet_len:]
 
         while len(string) > self.max_reply_len:
             reply = '@' + self.username + ' ' + string[:self.max_reply_len]

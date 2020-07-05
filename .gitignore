@@ -1,6 +1,7 @@
 .env
 *.swp
 *.swo
+*.pyc
 .DS_Store
 .python-version
 quotes.json
