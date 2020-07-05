@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from random import shuffle
-import requests, re, csv
+import requests, re, json
 
 AUTHOR_QUOTE_URL = 'https://www.goodreads.com/author/quotes/13009.Gilles_Deleuze'
 PARAMS = {'page' : 1}
@@ -8,7 +8,7 @@ PARAMS = {'page' : 1}
 quotes = []
 
 while True:
-    print('Scraping page', PARAMS['page'])
+    print('Scraping page', PARAMS['page'], '...')
 
     res = requests.get(url = AUTHOR_QUOTE_URL, params = PARAMS)
     parser = BeautifulSoup(res.text, 'html.parser')
@@ -24,9 +24,11 @@ while True:
     for tag in quoteTags:
         try:
             contents = tag.contents[0]
-            quote = re.search('\“.+\”', contents)[0]
-            formattedQuote = '\"' + quote[1:-1] + '\"'
-            quotes.append(formattedQuote)
+            match = re.search('\“(.+)\”', contents)
+            quote = match[1]
+            if quote[0] != '\"' and quote[-1] != '\"':
+                quote = '\"' + quote + '\"'
+            quotes.append(quote)
         except TypeError:
             # thrown when no match is found
             continue
@@ -34,10 +36,8 @@ while True:
     PARAMS['page'] += 1
 
 
-tweetFile = csv.writer(open('tokenized_tweets.csv', 'w')) 
-
 shuffle(quotes)
 
-for quote in quotes:
-    tweetFile.writerow([quote])
-
+quoteFile = open('quotes.json', 'w')
+quoteJson = json.dumps(quotes)
+quoteFile.write(quoteJson)
