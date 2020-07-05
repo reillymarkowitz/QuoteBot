@@ -1,4 +1,4 @@
-import io, csv, time, sys, argparse, tweepy
+import io, csv, time, sys, argparse, tweepy, json
 from bot import QuoteBot
 
 parser = argparse.ArgumentParser()
@@ -25,31 +25,23 @@ START_QUOTE = options.start
 WAIT_TIME = options.interval
 
 
-with open('tokenized_tweets.csv', 'rt') as quoteFile:
-    reader = csv.reader(quoteFile)
-    bot = QuoteBot()
-    
-    # Skip over the first
-    # START_QUOTE rows
-    for i in range(START_QUOTE):
-        next(reader)
+quoteFile = open('quotes.json', 'r')
+quotes = json.loads(quoteFile.read())
+bot = QuoteBot()
 
-    for i, row in enumerate(reader):
-        quote = row[0]
-        print('Tweeting quote #%d...' % (i + START_QUOTE))
+for i in range(START_QUOTE, len(quotes)):
+    print('Tweeting quote #%d...' % i)
 
-        try:
-            bot.tweet(quote)
-        except tweepy.TweepError as e:
-            error_code = e.message[0]['code']
-            
-            if error_code == 187:
-                print('Duplicate tweet. Skipping to the next one...')
-                continue
-            else:
-                print(e)
+    try:
+        bot.tweet(quotes[i])
+    except tweepy.TweepError as err:
+        if err.api_code == 187:
+            print('Duplicate tweet. Skipping to the next one...')
+            continue
+        else:
+            raise err
 
-        time.sleep(60 * 60 * WAIT_TIME)
+    time.sleep(60 * 60 * WAIT_TIME)
 
 print('No quotes remaining.')
 
