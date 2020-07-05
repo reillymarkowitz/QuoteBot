@@ -3,6 +3,6 @@
 *.swo
 .DS_Store
 .python-version
-tokenized_tweets.csv
+quotes.json
 __pycache__/
 venv/
