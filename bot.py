@@ -6,17 +6,27 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Replace with your own keys
-CONSUMER_KEY = os.getenv('CONSUMER_KEY')
-CONSUMER_SECRET = os.getenv('CONSUMER_SECRET')
+API_KEY = os.getenv('API_KEY')
+API_SECRET = os.getenv('API_SECRET')
 ACCESS_TOKEN = os.getenv('ACCESS_TOKEN')
 ACCESS_TOKEN_SECRET = os.getenv('ACCESS_TOKEN_SECRET')
 
+if API_KEY is None:
+    raise ValueError('Failed to read API_KEY from .env')
+
+if API_SECRET is None:
+    raise ValueError('Failed to read API_SECRET from .env')
+
+if ACCESS_TOKEN is None:
+    raise ValueError('Failed to read ACCESS_TOKEN from .env')
+
+if ACCESS_TOKEN_SECRET is None:
+    raise ValueError('Failed to read ACCESS_TOKEN_SECRET from .env')
 
 class QuoteBot:
 
     def __init__(self):
-        auth = OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
+        auth = OAuthHandler(API_KEY, API_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
         self.api = tweepy.API(auth)
 
