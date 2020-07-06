@@ -1,6 +1,6 @@
 import io, csv, time, sys, argparse, tweepy
-from bot import QuoteBot
 from scraper.tweet_queue import TweetQueue
+from bot import QuoteBot
 
 parser = argparse.ArgumentParser()
 
@@ -16,8 +16,8 @@ parser.add_argument(
         '-i', 
         '--interval', 
         type = int, 
-        default = 12,
-        help = 'time between tweets in hours (default 12)'
+        default = 24,
+        help = 'time between tweets in hours (default 24)'
     )
 
 options = parser.parse_args(sys.argv[1:])
