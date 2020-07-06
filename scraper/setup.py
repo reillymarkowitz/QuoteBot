@@ -1,10 +1,10 @@
+import requests, re
 from bs4 import BeautifulSoup
 from random import shuffle
-import requests, re, json
+from tweet_queue import TweetQueue
 
 AUTHOR_QUOTE_URL = 'https://www.goodreads.com/author/quotes/13009.Gilles_Deleuze'
 PARAMS = {'page' : 1}
-
 quotes = []
 
 while True:
@@ -37,7 +37,5 @@ while True:
 
 
 shuffle(quotes)
-
-quoteFile = open('quotes.json', 'w')
-quoteJson = json.dumps(quotes)
-quoteFile.write(quoteJson)
+queue = TweetQueue()
+queue.push(quotes)
