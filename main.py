@@ -1,29 +1,6 @@
-import io, csv, time, sys, argparse, tweepy
+import tweepy
 from scraper.tweet_queue import TweetQueue
 from bot import QuoteBot
-
-parser = argparse.ArgumentParser()
-
-parser.add_argument(
-        '-s',
-        '--start', 
-        type = int, 
-        default = 0,
-        help = 'quote number to begin with (default 0)'
-    )
-
-parser.add_argument(
-        '-i', 
-        '--interval', 
-        type = int, 
-        default = 24,
-        help = 'time between tweets in hours (default 24)'
-    )
-
-options = parser.parse_args(sys.argv[1:])
-
-START_QUOTE = options.start
-WAIT_TIME = options.interval
 
 bot = QuoteBot()
 queue = TweetQueue()
