@@ -24,7 +24,6 @@ if ACCESS_TOKEN_SECRET is None:
     raise ValueError('Failed to read ACCESS_TOKEN_SECRET from .env')
 
 class QuoteBot:
-
     def __init__(self):
         auth = OAuthHandler(API_KEY, API_SECRET)
         auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
